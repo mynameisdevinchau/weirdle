@@ -1,39 +1,41 @@
 function Keyboard() {
   const rows = [
-    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-    ["enter", "z", "x", "c", "v", "b", "n", "m", "del"],
-  ];
-
-  const baseBtn =
-    "bg-gray-500 border border-1 text-white px-3 py-2 rounded";
-
-  const labelFor = (key) => {
-    if (key === "enter") return "Enter";
-    if (key === "del") return "Del";
-    return key;
-  };
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "⌫"],
+  ]
 
   return (
-    <div id="keyboard-container">
+    <div className="flex flex-col gap-2 w-full max-w-lg mx-auto px-2">
       {rows.map((row, rowIdx) => (
-        <div key={rowIdx} className="text-white flex gap-2 mb-2">
+        <div key={rowIdx} className="flex gap-1.5 justify-center">
+          {rowIdx === 1 && <div className="w-3" />}
+
           {row.map((key) => (
             <button
               key={key}
-              data-key={key}
-              className={baseBtn}
+              data-key={key.toLowerCase()}
+              className={`
+                bg-[#818384] hover:bg-[#909294] active:bg-[#707274]
+                text-white font-bold
+                rounded
+                h-14
+                flex items-center justify-center
+                transition-colors
+                touch-manipulation
+                ${key === "ENTER" || key === "⌫" ? "px-4 text-xs" : "w-10 text-base"}
+              `}
               type="button"
             >
-              {labelFor(key)}
+              {key}
             </button>
           ))}
 
-          {rowIdx === 1 && <div className="spacer-half" />}
+          {rowIdx === 1 && <div className="w-3" />}
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default Keyboard;
+export default Keyboard
